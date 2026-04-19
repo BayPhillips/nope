@@ -1,0 +1,105 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum StepType {
+  AUTOLYSE
+  MIX
+  BULK_FERMENT
+  FOLD
+  PRESHAPE
+  BENCH_REST
+  SHAPE
+  PROOF
+  COLD_PROOF
+  SCORE
+  BAKE
+  COOL
+  CUSTOM
+}
+
+enum SessionStatus {
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+model Recipe {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  ingredients RecipeIngredient[]
+  steps       RecipeStep[]
+  sessions    BakeSession[]
+}
+
+model RecipeIngredient {
+  id        String  @id @default(cuid())
+  recipeId  String
+  name      String
+  weightG   Float
+  isFlour   Boolean @default(false)
+  sortOrder Int     @default(0)
+
+  recipe Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+}
+
+model RecipeStep {
+  id           String   @id @default(cuid())
+  recipeId     String
+  type         StepType
+  label        String
+  description  String?
+  durationMins Int?
+  tempF        Float?
+  sortOrder    Int      @default(0)
+
+  recipe Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+}
+
+model BakeSession {
+  id          String        @id @default(cuid())
+  recipeId    String
+  status      SessionStatus @default(IN_PROGRESS)
+  startedAt   DateTime      @default(now())
+  completedAt DateTime?
+
+  recipe Recipe     @relation(fields: [recipeId], references: [id])
+  steps  BakeStep[]
+  log    BakeLog?
+}
+
+model BakeStep {
+  id           String    @id @default(cuid())
+  sessionId    String
+  type         StepType
+  label        String
+  description  String?
+  durationMins Int?
+  tempF        Float?
+  sortOrder    Int
+  startedAt    DateTime?
+  completedAt  DateTime?
+
+  session BakeSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+}
+
+model BakeLog {
+  id               String   @id @default(cuid())
+  sessionId        String   @unique
+  rating           Int?
+  outcomeNotes     String?
+  improvementNotes String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  session BakeSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+}
