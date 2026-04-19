@@ -59,7 +59,7 @@ model RecipeStep {
   label        String
   description  String?
   durationMins Int?
-  tempC        Float?
+  tempF        Float?
   sortOrder    Int      @default(0)
 
   recipe Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
@@ -84,7 +84,7 @@ model BakeStep {
   label        String
   description  String?
   durationMins Int?
-  tempC        Float?
+  tempF        Float?
   sortOrder    Int
   startedAt    DateTime?
   completedAt  DateTime?

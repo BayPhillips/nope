@@ -112,11 +112,11 @@ function SortableStep({
         <Input
           type="number"
           min={0}
-          placeholder="°C"
+          placeholder="°F"
           className="w-16"
-          value={step.tempC ?? ""}
+          value={step.tempF ?? ""}
           onChange={(e) =>
-            onUpdate("tempC", e.target.value ? parseFloat(e.target.value) : null)
+            onUpdate("tempF", e.target.value ? parseFloat(e.target.value) : null)
           }
         />
 
@@ -165,7 +165,7 @@ export function StepTemplateList({ steps, onChange }: StepTemplateListProps) {
       label: "Custom Step",
       description: "",
       durationMins: null,
-      tempC: null,
+      tempF: null,
       sortOrder: steps.length,
     };
     onChange([...steps, newStep]);
@@ -185,7 +185,7 @@ export function StepTemplateList({ steps, onChange }: StepTemplateListProps) {
         <span className="w-40">Type</span>
         <span className="flex-1">Label</span>
         <span className="w-20 text-center">Duration (min)</span>
-        <span className="w-16 text-center">Temp (°C)</span>
+        <span className="w-16 text-center">Temp (°F)</span>
         <span className="w-8" />
       </div>
 

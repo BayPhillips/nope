@@ -39,12 +39,12 @@ export async function POST(request: Request) {
         })),
       },
       steps: {
-        create: steps.map((step: { type: string; label: string; description?: string; durationMins?: number | null; tempC?: number | null; sortOrder: number }) => ({
+        create: steps.map((step: { type: string; label: string; description?: string; durationMins?: number | null; tempF?: number | null; sortOrder: number }) => ({
           type: step.type,
           label: step.label,
           description: step.description || null,
           durationMins: step.durationMins || null,
-          tempC: step.tempC || null,
+          tempF: step.tempF || null,
           sortOrder: step.sortOrder,
         })),
       },

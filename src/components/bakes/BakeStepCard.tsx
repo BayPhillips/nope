@@ -55,10 +55,10 @@ export function BakeStepCard({
             <Badge variant="secondary" className="text-xs">
               {STEP_TYPE_LABELS[step.type]}
             </Badge>
-            {step.tempC && (
+            {step.tempF && (
               <span className="text-xs text-[var(--muted-foreground)] flex items-center gap-0.5">
                 <Thermometer className="h-3 w-3" />
-                {step.tempC}°C
+                {step.tempF}°F
               </span>
             )}
           </div>

@@ -37,7 +37,7 @@ export type StepFormItem = {
   label: string;
   description: string;
   durationMins: number | null;
-  tempC: number | null;
+  tempF: number | null;
   sortOrder: number;
 };
 

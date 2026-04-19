@@ -119,8 +119,8 @@ export default async function RecipeDetailPage({
                           : `${step.durationMins}m`}
                       </span>
                     )}
-                    {step.tempC && (
-                      <span className="text-xs text-[var(--muted-foreground)]">{step.tempC}°C</span>
+                    {step.tempF && (
+                      <span className="text-xs text-[var(--muted-foreground)]">{step.tempF}°F</span>
                     )}
                   </div>
                   {step.description && (

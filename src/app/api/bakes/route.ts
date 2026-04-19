@@ -54,7 +54,7 @@ export async function POST(request: Request) {
           label: step.label,
           description: step.description,
           durationMins: step.durationMins,
-          tempC: step.tempC,
+          tempF: step.tempF,
           sortOrder: step.sortOrder,
         })),
       },
