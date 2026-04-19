@@ -30,17 +30,38 @@ sudo -u postgres psql -c "ALTER USER sourdough CREATEDB;"
 
 ```bash
 cp .env.example .env.local
+# Edit .env.local if your database credentials differ from the defaults
 ```
 
-### 3. Install and migrate
+### 3. Install dependencies
 
 ```bash
 npm install
-DATABASE_URL="postgresql://sourdough:sourdough@localhost:5432/sourdough" npx prisma migrate dev
+# postinstall runs `prisma generate` automatically
+```
+
+### 4. Run database migrations
+
+```bash
+npm run db:migrate
+```
+
+### 5. Start the dev server
+
+```bash
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
+
+## npm scripts
+
+| Script | Description |
+|--------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Production build |
+| `npm run db:migrate` | Apply migrations (reads `.env.local`) |
+| `npm run db:migrate:dev` | Create + apply new migration (dev only) |
 
 ## Project Structure
 
@@ -57,4 +78,5 @@ src/
   types/         # Shared TypeScript types
 prisma/
   schema.prisma  # Database schema
+  migrations/    # SQL migration history
 ```
